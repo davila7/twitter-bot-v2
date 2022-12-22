@@ -17,10 +17,10 @@ $ node index.js
 
 ## Tutorial
 
-https://youtu.be/XhkB5_ueb3M
+[Youtube](https://youtu.be/XhkB5_ueb3M)
 
 ## Artículo con el paso a paso para ejecutar
 
-https://medium.com/@dan.avila7/bot-en-twitter-con-nodejs-ccc35a8914ca
+[Medium](https://medium.com/@dan.avila7/bot-en-twitter-con-nodejs-ccc35a8914ca)
 
 

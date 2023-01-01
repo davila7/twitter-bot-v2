@@ -17,7 +17,13 @@ $ node index.js
 
 ## Tutorial
 
-[Youtube](https://youtu.be/XhkB5_ueb3M)
+### Primera parte:
+Construye conecta nodejs con twitter:
+[Youtube](https://youtu.be/hi_qOqTL4Hk)
+
+### Segunda parte:
+Conecta OpenAI a Twitter y deja que un bot responda por ti:
+[Youtube](https://youtu.be/hi_qOqTL4Hk)
 
 ## Artículo con el paso a paso para ejecutar
 

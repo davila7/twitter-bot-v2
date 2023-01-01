@@ -10,7 +10,7 @@ async function main(){
     //user
     const user = await user_client.v2.me();
     //console.log(user);
-    let user_id = '1598408860720570384'; //cambia esto a tu propio user id
+    let user_id = '1598408860720570384'; //  cambia esto a tu propio user id
 
     const rules = await dev_client.v2.streamRules();
     console.log(rules);
@@ -19,8 +19,10 @@ async function main(){
     //     delete: { ids: rules.data.map( rule => rule.id) }
     // })
 
+    // regla
+    let regla = '#CodeGPT';
     // await dev_client.v2.updateStreamRules({
-    //     add: [{ value: '#CodeGPT' } ],
+    //     add: [{ value: regla } ], // cambia esto por tus propias reglas
     // });
 
     const stream = dev_client.v2.searchStream({
@@ -34,7 +36,7 @@ async function main(){
         // Ignore RTs or self-sent tweets
         const isARt = tweet.data.referenced_tweets?.some(tweet => tweet.type === 'retweeted') ?? false;
         console.log(isARt);
-        if (isARt || tweet.data.author_id === "1598408860720570384") {
+        if (isARt || tweet.data.author_id === user_id) {
             return;
         }
 
@@ -44,9 +46,12 @@ async function main(){
         // //retweet
         // await user_client.v2.retweet(user_id, tweet.data.id);
 
-        //reply
+        // reply texto directo
+        // await user_client.v1.reply('I like this!', tweet.data.id);
+
+        //reply con openai
         let respuesta = '';
-        const clear_text = tweet.data.text.replace('#CodeGPT', '');
+        const clear_text = tweet.data.text.replace(regla, '');
 
         const one_shot_prompt = 'Twitter Bot: Preguntame algo sobre Javascript. '+
         'Yo: Claro, Cuando se creó el lenguaje javascript? '+
@@ -56,7 +61,7 @@ async function main(){
         try{  
 
             //davinci
-            
+
             // const completion = await openai.createCompletion({
             //     model: 'text-davinci-003',
             //     prompt: one_shot_prompt,

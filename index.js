@@ -2,6 +2,7 @@ const dev_client = require('./client/dev_client.js');
 const user_client = require('./client/user_client.js');
 const openai = require('./client/openai.js');
 
+
 const {ETwitterStreamEvent} = require('twitter-api-v2');
 
 async function main(){
@@ -45,40 +46,43 @@ async function main(){
 
         //reply
         let respuesta = '';
-        const clean_text = tweet.data.text.replace('#CodeGPT', '');
-        const one_shot_prompt = 'Twitter Bot: Preguntame algo sobre sobre Javascript. '+
-        'Yo: Claro, cuando se creó el lenguaje? '+
+        const clear_text = tweet.data.text.replace('#CodeGPT', '');
+
+        const one_shot_prompt = 'Twitter Bot: Preguntame algo sobre Javascript. '+
+        'Yo: Claro, Cuando se creó el lenguaje javascript? '+
         'Twitter Bot: El lenguaje se creó en 1995. '+
-        'Yo: '+clean_text;
-        console.log(one_shot_prompt);
-        try{
+        'Yo: '+clear_text;
+
+        try{  
+
             //davinci
-            const completion = await openai.createCompletion({
-                model: "text-davinci-003",
-                prompt: one_shot_prompt,
-                temperature: 0.5,
-                max_tokens: 250,
-                top_p: 1.0,
-                frequency_penalty: 0.5,
-                presence_penalty: 0.0,
-                stop: ["Yo:"],
-            });
-            respuesta = "Davinci: "+completion.data.choices[0].text;
+            
+            // const completion = await openai.createCompletion({
+            //     model: 'text-davinci-003',
+            //     prompt: one_shot_prompt,
+            //     temperature: 0.5,
+            //     max_tokens: 250,
+            //     top_p: 1.0,
+            //     stop: ["Yo:"]
+            // });
 
             //dall-e
-            const response = await openai.createImage({
-                prompt: clean_text,
-                n: 1,
-                size: '1024x1024'
-            });
-            respuesta = "Dall-e: "+response.data.data[0].url;
-        }
-        catch(error)
-        {
+            // const response = await openai.createImage({
+            //     prompt: clear_text,
+            //     n: 1,
+            //     size: '1024x1024'
+            // });
+
+            // respuesta = response.data.data[0].url;
+            
+        }catch(error){
             console.log(error);
         }
+
         await user_client.v1.reply(respuesta, tweet.data.id);
+        
     });
+
 };
 
 main();

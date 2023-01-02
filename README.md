@@ -44,6 +44,6 @@ Obtén el API Key, responde tweets con texto y con un generador de imágenes:
 
 ## Artículo con el paso a paso para ejecutar
 
-[Medium](https://medium.com/@dan.avila7/bot-en-twitter-con-nodejs-ccc35a8914ca)
+[Bot en Twitter con Nodejs](https://medium.com/@dan.avila7/bot-en-twitter-con-nodejs-ccc35a8914ca)
 
 

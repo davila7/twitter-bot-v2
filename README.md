@@ -6,9 +6,8 @@ Bot en Twitter con Node.js y OpenAI
 ```
 $ npm install
 ```
-
-```
 Agrega el archivo .env y agrega las API Kyes de Twitter y OpenAI
+```
 
 #dev
 APP_TOKEN=""
@@ -31,16 +30,14 @@ $ node index.js
 ```
 
 
-<hr>
+# Tutoriales
 
-## Tutorial
-
-### Primera parte para conectar Twitter
+## Primera parte para conectar Twitter
 
 Construye conecta nodejs con twitter:
 [Youtube](https://youtu.be/hi_qOqTL4Hk)
 
-### Segunda parte para conectar OpenAI
+## Segunda parte para conectar OpenAI
 
 Obtén el API Key, responde tweets con texto y con un generador de imágenes:
 [Youtube](https://youtu.be/zVHDeeyIbXs)

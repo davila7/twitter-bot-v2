@@ -11,7 +11,7 @@ const openai = new OpenAIApi(configuration);
 async function main() {
 
     const response = await openai.createImage({
-      prompt: 'Un programador youtuber Chileno que se llama Daniel San',
+      prompt: 'Un programador youtuber Chileno que se llama Daniel San', // cambia este prompt para generar diferentes imágenes
       n: 1,
       size: '1024x1024'
     });

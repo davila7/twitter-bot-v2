@@ -12,7 +12,7 @@ const openai = new OpenAIApi(configuration);
 async function main() {
     const completion = await openai.createCompletion({
         model: "text-davinci-003",
-        prompt: 'Hola cómo estás?',
+        prompt: 'Hola cómo estás?', // cambia este prompt para generar diferente texto
         temperature: 0.5,
         max_tokens: 250,
         top_p: 1.0,

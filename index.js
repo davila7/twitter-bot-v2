@@ -15,44 +15,53 @@ async function main(){
     const rules = await dev_client.v2.streamRules();
     console.log(rules);
 
+    //descomenta para eliminar las reglas anteriores
     // await dev_client.v2.updateStreamRules({
     //     delete: { ids: rules.data.map( rule => rule.id) }
     // })
 
     // regla
-    let regla = '#CodeGPT';
+    let regla = '#CodeGPT'; // cambia esto por tu propia regla
+
+    //descomenta para agregar una nueva regla
     // await dev_client.v2.updateStreamRules({
     //     add: [{ value: regla } ], // cambia esto por tus propias reglas
     // });
 
+
+    //comienza el stream para obtener los datos de twitter
     const stream = dev_client.v2.searchStream({
         'tweet.fields' : ['referenced_tweets', 'author_id']
     });
 
+    //recorremos el stream
     (await stream).on(ETwitterStreamEvent.Data, async tweet => {
         console.log(tweet.data.author_id);
         console.log(tweet.data.text);
 
-        // Ignore RTs or self-sent tweets
+        // ignora los retweets y también los tweets del mismo bot
         const isARt = tweet.data.referenced_tweets?.some(tweet => tweet.type === 'retweeted') ?? false;
         console.log(isARt);
         if (isARt || tweet.data.author_id === user_id) {
             return;
         }
 
-        //like
+        // da like al tweet
         // await user_client.v2.like(user_id, tweet.data.id);
 
-        // //retweet
+        // da retweet al tweet
         // await user_client.v2.retweet(user_id, tweet.data.id);
 
-        // reply texto directo
+        // responde el tweet con un texto determinado
         // await user_client.v1.reply('I like this!', tweet.data.id);
 
-        //reply con openai
+        // responde el tweet con openai
         let respuesta = '';
+
+        // le sacamos la regla al tweet y obtenemos el texto limpio
         const clear_text = tweet.data.text.replace(regla, '');
 
+        // creamos el prompt inicial "one show prompt" con un chat de ejemplo para dar contexto a openai
         const one_shot_prompt = 'Twitter Bot: Preguntame algo sobre Javascript. '+
         'Yo: Claro, Cuando se creó el lenguaje javascript? '+
         'Twitter Bot: El lenguaje se creó en 1995. '+
@@ -60,8 +69,8 @@ async function main(){
 
         try{  
 
-            //davinci
-
+            // davinci
+            // descomenta esto para obtener texto generado por openai a partir del tweet
             // const completion = await openai.createCompletion({
             //     model: 'text-davinci-003',
             //     prompt: one_shot_prompt,
@@ -70,14 +79,15 @@ async function main(){
             //     top_p: 1.0,
             //     stop: ["Yo:"]
             // });
+            // respuesta = completion.data.choices[0].text
 
             //dall-e
+            // descomenta esto para obtener una imagen generada por openai del tweet
             // const response = await openai.createImage({
             //     prompt: clear_text,
             //     n: 1,
             //     size: '1024x1024'
             // });
-
             // respuesta = response.data.data[0].url;
             
         }catch(error){

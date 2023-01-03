@@ -7,57 +7,55 @@ const {ETwitterStreamEvent} = require('twitter-api-v2');
 
 async function main(){
     
-    //user
+    //Get the user
     const user = await user_client.v2.me();
     //console.log(user);
-    let user_id = '1598408860720570384'; //  cambia esto a tu propio user id
+    let user_id = ''; // change this to your own user_id
 
     const rules = await dev_client.v2.streamRules();
     console.log(rules);
 
-    //descomenta para eliminar las reglas anteriores
+    // uncomment to remove old rules
     // await dev_client.v2.updateStreamRules({
     //     delete: { ids: rules.data.map( rule => rule.id) }
     // })
 
-    // regla
-    let regla = '#CodeGPT'; // cambia esto por tu propia regla
+    // create a rule
+    let rule = '#CodeGPT'; // change this to your own rule
 
-    //descomenta para agregar una nueva regla
+    // uncomment to add a new rules
     // await dev_client.v2.updateStreamRules({
-    //     add: [{ value: regla } ], // cambia esto por tus propias reglas
+    //     add: [{ value: rule } ],
     // });
 
 
-    //comienza el stream para obtener los datos de twitter
+    // start the stream to get twitter data
     const stream = dev_client.v2.searchStream({
         'tweet.fields' : ['referenced_tweets', 'author_id']
     });
 
-    //recorremos el stream
     (await stream).on(ETwitterStreamEvent.Data, async tweet => {
         console.log(tweet.data.author_id);
         console.log(tweet.data.text);
 
-        // ignora los retweets y también los tweets del mismo bot
+        // Ignore retweets and also tweets from the same bot
         const isARt = tweet.data.referenced_tweets?.some(tweet => tweet.type === 'retweeted') ?? false;
         console.log(isARt);
         if (isARt || tweet.data.author_id === user_id) {
             return;
         }
 
-        // da like al tweet
+        // like
         // await user_client.v2.like(user_id, tweet.data.id);
 
-        // da retweet al tweet
+        // retweet
         // await user_client.v2.retweet(user_id, tweet.data.id);
 
-        // responde el tweet con un texto determinado
+        // reply tweet with a text
         // await user_client.v1.reply('I like this!', tweet.data.id);
 
-        // responde el tweet con openai
+        // reply to the tweet with openai
         let respuesta = '';
-
         // le sacamos la regla al tweet y obtenemos el texto limpio
         const clear_text = tweet.data.text.replace(regla, '');
 

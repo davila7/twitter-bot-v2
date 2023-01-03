@@ -1,12 +1,12 @@
 # twitter-bot-v2
-Bot en Twitter con Node.js y OpenAI
+Twitter-Bot-GPT  (Node.js y OpenAI)
 
 ### Install
 
 ```
 $ npm install
 ```
-Agrega el archivo .env y agrega las API Kyes de Twitter y OpenAI
+Add the .env file and complete Twitter and OpenAI Kyes APIs
 ```
 
 #dev
@@ -30,20 +30,21 @@ $ node index.js
 ```
 
 
-# Tutoriales
+# tutorials in Spanish
 
-## Primera parte para conectar Twitter
+## First part to connect Twitter
 
-Construye conecta nodejs con twitter:
+Connect Twitter:
 [Youtube](https://youtu.be/hi_qOqTL4Hk)
+[Bot en Twitter con Nodejs](https://medium.com/@dan.avila7/bot-en-twitter-con-nodejs-ccc35a8914ca)
 
-## Segunda parte para conectar OpenAI
+## Second part to connect OpenAI
 
-Obtén el API Key, responde tweets con texto y con un generador de imágenes:
+Connect OpenAI:
 [Youtube](https://youtu.be/zVHDeeyIbXs)
 
-## Artículo con el paso a paso para ejecutar
 
-[Bot en Twitter con Nodejs](https://medium.com/@dan.avila7/bot-en-twitter-con-nodejs-ccc35a8914ca)
+
+
 
 

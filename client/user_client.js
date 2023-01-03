@@ -1,4 +1,6 @@
 require('dotenv').config()
+
+// Twitter v2 User Client
 const {TwitterApi} = require('twitter-api-v2');
 
 const user_client = new TwitterApi({
